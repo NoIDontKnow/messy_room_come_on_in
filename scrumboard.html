@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Scrum Board</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .board {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .column {
+      background: #fff;
+      border-radius: 8px;
+      padding: 10px;
+      width: 32%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .column h2 {
+      text-align: center;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+    }
+
+    .task {
+      background: #e3f2fd;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: grab;
+    }
+
+    .task:active {
+      cursor: grabbing;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🛠️ Simple Scrum Board</h1>
+
+<div class="board">
+  <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h2>To Do</h2>
+    <div class="task" draggable="true" ondragstart="drag(event)" id="task1">📌 Design homepage</div>
+    <div class="task" draggable="true" ondragstart="drag(event)" id="task2">📌 Write specs</div>
+  </div>
+
+  <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h2>In Progress</h2>
+    <div class="task" draggable="true" ondragstart="drag(event)" id="task3">⚙️ Develop API</div>
+  </div>
+
+  <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h2>Done</h2>
+    <div class="task" draggable="true" ondragstart="drag(event)" id="task4">✅ Project setup</div>
+  </div>
+</div>
+
+<script>
+  function allowDrop(ev) {
+    ev.preventDefault();
+  }
+
+  function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+
+  function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.closest(".column").appendChild(document.getElementById(data));
+  }
+</script>
+
+</body>
+</html>

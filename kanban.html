@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kanban Board</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .kanban-board {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+    }
+
+    .column {
+      background: #ffffff;
+      border-radius: 8px;
+      flex: 1;
+      min-width: 200px;
+      max-width: 250px;
+      padding: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .column h2 {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+    }
+
+    .task {
+      background-color: #e0f7fa;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: grab;
+    }
+
+    .task:active {
+      cursor: grabbing;
+    }
+
+    /* Scrollbar styling for overflow */
+    .kanban-board::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    .kanban-board::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>📋 Simple Kanban Board</h1>
+
+<div class="kanban-board">
+  <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h2>Backlog</h2>
+    <div class="task" draggable="true" ondragstart="drag(event)" id="task1">📝 Research competitors</div>
+    <div class="task" draggable="true" ondragstart="drag(event)" id="task2">📝 Brainstorm features</div>
+  </div>
+
+  <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h2>To Do</h2>
+    <div class="task" draggable="true" ondragstart="drag(event)" id="task3">📌 Create wireframes</div>
+  </div>
+
+  <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h2>In Progress</h2>
+    <div class="task" draggable="true" ondragstart="drag(event)" id="task4">⚙️ Build login page</div>
+  </div>
+
+  <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h2>Review</h2>
+    <div class="task" draggable="true" ondragstart="drag(event)" id="task5">🔍 Review API code</div>
+  </div>
+
+  <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h2>Done</h2>
+    <div class="task" draggable="true" ondragstart="drag(event)" id="task6">✅ Setup project</div>
+  </div>
+</div>
+
+<script>
+  function allowDrop(ev) {
+    ev.preventDefault();
+  }
+
+  function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+
+  function drop(ev) {
+    ev.preventDefault();
+    const data = ev.dataTransfer.getData("text");
+    const task = document.getElementById(data);
+
+    // Drop only inside columns
+    if (ev.target.classList.contains('column')) {
+      ev.target.appendChild(task);
+    } else if (ev.target.closest('.column')) {
+      ev.target.closest('.column').appendChild(task);
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,2 +1,9 @@
-# messy_room_come_on_in
-welcome will definitley clean up and everything but hey is it workable?
+# Resource Allocation Tool
+
+Allocate resources (e.g., water, power) across regions given weights and limits.
+
+## Run
+```bash
+python -m pip install -r requirements.txt
+streamlit run app.py
+```

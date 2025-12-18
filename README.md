@@ -1,2 +1,9 @@
-# messy_room_come_on_in
-welcome will definitley clean up and everything but hey is it workable?
+# PID Controller Visualizer
+
+Interactive PID tuning demo. Adjust P, I, D sliders and see setpoint tracking, error, and control signal.
+
+## Run
+```bash
+python -m pip install -r requirements.txt
+streamlit run app.py
+```
